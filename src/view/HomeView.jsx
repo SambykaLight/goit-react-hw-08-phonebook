@@ -1,27 +1,21 @@
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import {  React} from "react";
+import React from 'react';
+import { Container, Link, Typography } from '@mui/material';
+import {NavLink} from 'react-router-dom';
 
-const HomeView = () => (
-<Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Home
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Registration</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
-);
+const HomeView= () => {
+    return <Container>
+    <Typography variant="h3" component="h1" sx={{ textAlign: 'center' }}>
+      Welcome to your personal phonebook. Please
+      <br />
+      <Link to="/RegistrationView" component={NavLink}>
+        register
+      </Link>{' '}
+      or{' '}
+      <Link to="/LoginView" component={NavLink}>
+        login
+      </Link>
+    </Typography>
+  </Container>
+}
 
-export default HomeView;
+export default HomeView

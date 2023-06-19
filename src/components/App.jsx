@@ -1,24 +1,35 @@
-import { AppBar, Container, Switch } from '@mui/material';
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomeView from 'view/HomeView';
-import RegistrationView from 'view/RegistrationView';
 import LoginView from 'view/LoginView';
-import ContactsView from 'view/ContactsView';
+import NavBar from 'view/NavBar';
+import RegistrationView from 'view/RegistrationView';
+import { ContactsView } from 'view/ContactsView';
+import { useAuth } from '../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import authOperation from 'redux/auth/authOperation';
+import { PrivateRoute } from './PrivateRoute';
 
-// import MenuIcon from '@mui/icons-material/Menu';
 
-export  function App() {
-  return (
+export function App() {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth;
+  useEffect(() => {
+    dispatch(authOperation.refreshUser());
+  }, [dispatch]);
 
-    <Container>
-      <AppBar/>
-      <Switch>
-        <Route exact path='/' component={HomeView}/>
-        <Route path='/register' component={RegistrationView}/>
-        <Route path='login' component={LoginView}/>
-        <Route path='/contacts' component={ContactsView}/>
-      </Switch>
-      </Container>
+  return isRefreshing ? (
+    <b>Refreshing your data</b>
+  ) : (
+    <div>
+      <NavBar />
+      <Routes>
+        <Route path="/HomeView" element={<HomeView />} />
+        <Route path="LoginView" element={<LoginView />} />
+        <Route path="RegistrationView" element={<RegistrationView />} />
+        <Route path="ContactsView" element={<PrivateRoute redirectTo='/HomeView' component={<ContactsView/>} />} />
+      </Routes>
+    </div>
   );
 }
