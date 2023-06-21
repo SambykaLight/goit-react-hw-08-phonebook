@@ -46,7 +46,7 @@ export const ContactForm = () => {
           required
         />
       </Label>
-      <Submit type="submit">Submit</Submit>
+      <Submit type="submit">Add</Submit>
     </Form>
   );
 };

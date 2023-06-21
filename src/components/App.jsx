@@ -26,10 +26,12 @@ export function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/HomeView" element={<HomeView />} />
-        <Route path="LoginView" element={ <PublicRoute redirectTo='/ContactsView' component={<LoginView />}/>} />
-        <Route path="RegistrationView" element={ <PublicRoute redirectTo='/ContactsView' component={<RegistrationView />} />}/>
-        <Route path="ContactsView" element={<PrivateRoute redirectTo='/HomeView' component={<ContactsView/>} />} />
+        {/* <Route path='/' element={<Layout/>}> */}
+        <Route path='/' element={<HomeView />} />
+        <Route path="/LoginView" element={ <PublicRoute redirectTo='/ContactsView' component={<LoginView />}/>} />
+        <Route path="/RegistrationView" element={ <PublicRoute redirectTo='/ContactsView' component={<RegistrationView />} />}/>
+        <Route path="/ContactsView" element={<PrivateRoute redirectTo='/' component={<ContactsView/>} />} />
+        {/* </Route> */}
       </Routes>
     </div>
   );
