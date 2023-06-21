@@ -4,10 +4,15 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import UserMenu from 'components/userMenu/UserMenu';
+import { AuthNav } from 'components/AuthNav/AuthNav';
+import { useSelector } from 'react-redux';
+import authSelectors from 'redux/auth/authSelectors';
 
 
 
 export default function NavBar() {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -17,9 +22,10 @@ export default function NavBar() {
             <Link style={{textDecoration:"none", color: "white", paddingLeft: 20}} to="ContactsView" color="inherit">Contacts</Link>
 
           </Typography>
-          <Link style={{textDecoration:"none", color: "white", paddingRight: 20}} to="LoginView" color="inherit"> 
-            Login</Link>
-          <Link style={{textDecoration:"none", color: "white"}} to="RegistrationView" color="inherit">Sign Up</Link>
+          { isLoggedIn ? <UserMenu/> : <AuthNav/>}
+          
+          
+
 
         </Toolbar>
       </AppBar>

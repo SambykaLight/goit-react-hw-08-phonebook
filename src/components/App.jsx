@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import authOperation from 'redux/auth/authOperation';
 import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 
 export function App() {
@@ -26,8 +27,8 @@ export function App() {
       <NavBar />
       <Routes>
         <Route path="/HomeView" element={<HomeView />} />
-        <Route path="LoginView" element={<LoginView />} />
-        <Route path="RegistrationView" element={<RegistrationView />} />
+        <Route path="LoginView" element={ <PublicRoute redirectTo='/ContactsView' component={<LoginView />}/>} />
+        <Route path="RegistrationView" element={ <PublicRoute redirectTo='/ContactsView' component={<RegistrationView />} />}/>
         <Route path="ContactsView" element={<PrivateRoute redirectTo='/HomeView' component={<ContactsView/>} />} />
       </Routes>
     </div>
